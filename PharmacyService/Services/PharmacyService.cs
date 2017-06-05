@@ -12,13 +12,19 @@ namespace PharmacyService.Services
     public class PharmacyService
     {
         #region Singleton
-
+        private static object lock_obj = new object();
         private static PharmacyService _instance;
         public static PharmacyService Instance
         {
-            get { return (_instance == null) ? _instance = new PharmacyService() : _instance; }
+            get
+            {
+                lock(lock_obj)
+                {
+                    return (_instance == null) ? _instance = new PharmacyService() : _instance;
+                }
+            }
         }
-
+        private PharmacyService() { }
         #endregion
 
         public async Task<List<Pharmacy>> GetList(string city)
