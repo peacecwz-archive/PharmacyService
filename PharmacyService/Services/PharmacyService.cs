@@ -18,7 +18,7 @@ namespace PharmacyService.Services
         {
             get { return (_instance == null) ? _instance = new PharmacyService() : _instance; }
         }
-
+        private PharmacyService() { }
         #endregion
 
         public async Task<List<Pharmacy>> GetList(string city)
